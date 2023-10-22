@@ -1,5 +1,7 @@
 package board
 
+import "strings"
+
 /*
 Row bezeichnet eine Zeile eines Spielfelds: eine Slice aus Strings.
 
@@ -28,4 +30,24 @@ func MakeRow(fill string, length int) Row {
 		row[i] = fill
 	}
 	return row
+}
+
+// MakeRowFromString erwartet einen String 's'
+// und erzeugt und liefert eine neue Zeile mit den Einträgen aus 's'.
+// Wenn einer der Einträge nicht erlaubt ist, wird eine Panic ausgelöst.
+func MakeRowFromString(s string) Row {
+	PanicIfLengthInvalid(len(s))
+	row := make(Row, len(s))
+	for i, c := range s {
+		PanicIfStringInvalid(string(c))
+		row[i] = string(c)
+	}
+	return row
+}
+
+// AsString liefert die Elemente der Zeile als String.
+// Im Gegensatz zu Row.String werden die Elemente nicht
+// voneinander getrennt, sondern direkt aneinandergehängt.
+func (r Row) AsString() string {
+	return strings.Join(r, "")
 }
