@@ -49,3 +49,50 @@ func (b Board) Cols() int {
 func (b Board) IsSquare() bool {
 	return b.Rows() == b.Cols()
 }
+
+// GetRow erwartet einen Index und liefert die Zeile mit dem angegebenen Index.
+// Wenn der Index ungültig ist, wird eine Panic ausgelöst.
+func (b Board) GetRow(index int) Row {
+	return b[index]
+}
+
+// GetCol erwartet einen Index und liefert die Spalte mit dem angegebenen Index.
+// Wenn der Index ungültig ist, wird eine Panic ausgelöst.
+func (b Board) GetCol(index int) Row {
+	col := make(Row, b.Rows())
+	for i := range col {
+		col[i] = b[i][index]
+	}
+	return col
+}
+
+// GetDiagRight erwartet eine Spalte col und liefert die Diagonale,
+// die in der Spalte col beginnt und nach rechts unten verläuft.
+// Löst keine Panic aus, wenn die Spalte ungültig ist, sondern liefert
+// ggf. eine Teil-Diagonale, die in einer späteren Zeile beginnt.
+// Diese Teil-Diagonale kann auch leer sein.
+func (b Board) GetDiagRight(col int) Row {
+	rows, cols := b.Rows(), b.Cols()
+	diag := make(Row, 0)
+	for i := 0; i < rows && i+col < cols; i++ {
+		if i+col >= 0 {
+			diag = append(diag, b[i][i+col])
+		}
+	}
+	return diag
+}
+
+// GetDiagLeft erwartet eine Spalte col und liefert die Diagonale,
+// die in der Spalte col beginnt und nach links unten verläuft.
+// Löst keine Panic aus, wenn die Spalte ungültig ist, sondern liefert
+// ggf. eine Teil-Diagonale, die in einer späteren Zeile beginnt.
+// Diese Teil-Diagonale kann auch leer sein.
+func (b Board) GetDiagLeft(col int) Row {
+	diag := make(Row, 0)
+	for i := 0; i < b.Rows() && col-i >= 0; i++ {
+		if col-i < b.Cols() {
+			diag = append(diag, b[i][col-i])
+		}
+	}
+	return diag
+}

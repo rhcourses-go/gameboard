@@ -182,3 +182,88 @@ func ExampleBoard_IsSquare() {
 	// false
 	// false
 }
+
+// ExampleBoard_GetRow zeigt die korrekte Verwendung von GetRow.
+func ExampleBoard_GetRow() {
+	b := MakeBoardFromStrings(
+		"ABC",
+		"DEF",
+		"GHI",
+	)
+	fmt.Println(b.GetRow(0).AsString())
+	fmt.Println(b.GetRow(1).AsString())
+	fmt.Println(b.GetRow(2).AsString())
+
+	// Output:
+	// ABC
+	// DEF
+	// GHI
+}
+
+// ExampleBoard_GetCol zeigt die korrekte Verwendung von GetCol.
+func ExampleBoard_GetCol() {
+	b := MakeBoardFromStrings(
+		"ABC",
+		"DEF",
+		"GHI",
+	)
+	fmt.Println(b.GetCol(0).AsString())
+	fmt.Println(b.GetCol(1).AsString())
+	fmt.Println(b.GetCol(2).AsString())
+
+	// Output:
+	// ADG
+	// BEH
+	// CFI
+}
+
+// ExampleBoard_GetDiagRight zeigt die korrekte Verwendung von GetDiagRight.
+func ExampleBoard_GetDiagRight() {
+	b := MakeBoardFromStrings(
+		"ABCDE",
+		"FGHIJ",
+		"KLMNO",
+	)
+	fmt.Println(b.GetDiagRight(-2).AsString())
+	fmt.Println(b.GetDiagRight(-1).AsString())
+	fmt.Println(b.GetDiagRight(0).AsString())
+	fmt.Println(b.GetDiagRight(1).AsString())
+	fmt.Println(b.GetDiagRight(2).AsString())
+	fmt.Println(b.GetDiagRight(3).AsString())
+	fmt.Println(b.GetDiagRight(4).AsString())
+
+	// Output:
+	// K
+	// FL
+	// AGM
+	// BHN
+	// CIO
+	// DJ
+	// E
+
+}
+
+// ExampleBoard_GetDiagLeft zeigt die korrekte Verwendung von GetDiagLeft.
+func ExampleBoard_GetDiagLeft() {
+	b := MakeBoardFromStrings(
+		"ABCDE",
+		"FGHIJ",
+		"KLMNO",
+	)
+	fmt.Println(b.GetDiagLeft(0).AsString())
+	fmt.Println(b.GetDiagLeft(1).AsString())
+	fmt.Println(b.GetDiagLeft(2).AsString())
+	fmt.Println(b.GetDiagLeft(3).AsString())
+	fmt.Println(b.GetDiagLeft(4).AsString())
+	fmt.Println(b.GetDiagLeft(5).AsString())
+	fmt.Println(b.GetDiagLeft(6).AsString())
+
+	// Output:
+	// A
+	// BF
+	// CGK
+	// DHL
+	// EIM
+	// JN
+	// O
+}
