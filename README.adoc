@@ -1,0 +1,19 @@
+= Spielfelder für Brettspiele
+
+Dieses Repo enthält ein Package für die Erstellung von Spielfeldern für Brettspiele.
+
+## Kontext
+
+Es geht um Brettspiele, die mit der Programmiersprache Go geschrieben und die
+auf der Konsole gespielt werden.
+Ein Spielfeld ist i.W. ein Rechteck aus Zellen, die mit Zeichen gefüllt werden.
+
+Diese Bibliothek bietet Funktionen zum Erstellen, Verändern, Analysieren
+und Ausgeben von Spielfeldern. Sie bietet aber keine eigene Spiellogik.
+
+Die Idee ist, dass dieses Package die Entwicklung eines Spiels vereinfachen soll
+und dass es von unterschiedlichen Spielen verwendet werden kann.
+Einfache Funktionen, wie z.B. die Abfrage, ob Zellen leer, Zeilen oder Spalten
+voll, oder das Spielfeld voll ist, werden von diesem Package bereitgestellt.
+Konkretere Funktionen, wie z.B. die Abfrage, ob ein Spieler gewonnen hat,
+müssen vom Spiel selbst implementiert werden.
