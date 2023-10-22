@@ -1,18 +1,24 @@
 package board
 
 import (
-	"fmt"
+	"reflect"
 	"testing"
 )
 
-// ExampleMakeRow zeigt die korrekte Verwendung von MakeRow.
-func ExampleMakeRow() {
-	fmt.Println(MakeRow(" ", 3))
-	fmt.Println(MakeRow("*", 4))
+// TestMakeRow prüft die korrekte Verwendung von MakeRow.
+func TestMakeRow(t *testing.T) {
+	r1 := MakeRow(" ", 3)
+	r1_expected := Row{" ", " ", " "}
 
-	// Output:
-	// |   |   |   |
-	// | * | * | * | * |
+	r2 := MakeRow("*", 4)
+	r2_expected := Row{"*", "*", "*", "*"}
+
+	if !reflect.DeepEqual(r1, r1_expected) {
+		t.Errorf("MakeRow returned unexpected result.\n  expected: %#v\n  got: %#v.", r1_expected, r1)
+	}
+	if !reflect.DeepEqual(r2, r2_expected) {
+		t.Errorf("MakeRow returned unexpected result.\n  expected: %#v\n  got:      %#v", r2_expected, r2)
+	}
 }
 
 // TestMakeRowInvalidLength testet, ob MakeRow eine Panic auslöst,

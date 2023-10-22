@@ -2,40 +2,67 @@ package board
 
 import (
 	"fmt"
+	"reflect"
+	"strings"
 	"testing"
 )
 
-// ExampleMakeBoard zeigt die korrekte Verwendung von MakeBoard.
-func ExampleMakeBoard() {
-	fmt.Println(MakeBoard("*", 1, 1))
-	fmt.Println(MakeBoard("*", 2, 2))
-	fmt.Println(MakeBoard("*", 3, 3))
-	fmt.Println(MakeBoard("*", 2, 4))
+// TestMakeBoard prüft die korrekte Verwendung von MakeBoard.
+func TestMakeBoard(t *testing.T) {
+	b1 := MakeBoard("*", 1, 1)
+	b1_expected := Board{MakeRow("*", 1)}
 
-	// Output:
-	// +---+
-	// | * |
-	// +---+
-	//
-	// +---+---+
-	// | * | * |
-	// +---+---+
-	// | * | * |
-	// +---+---+
-	//
-	// +---+---+---+
-	// | * | * | * |
-	// +---+---+---+
-	// | * | * | * |
-	// +---+---+---+
-	// | * | * | * |
-	// +---+---+---+
-	//
-	// +---+---+---+---+
-	// | * | * | * | * |
-	// +---+---+---+---+
-	// | * | * | * | * |
-	// +---+---+---+---+
+	b2 := MakeBoard("*", 2, 2)
+	b2_expected := Board{
+		MakeRow("*", 2),
+		MakeRow("*", 2),
+	}
+
+	b3 := MakeBoard("*", 3, 3)
+	b3_expected := Board{
+		MakeRow("*", 3),
+		MakeRow("*", 3),
+		MakeRow("*", 3),
+	}
+
+	b4 := MakeBoard("*", 2, 4)
+	b4_expected := Board{
+		MakeRow("*", 4),
+		MakeRow("*", 4),
+	}
+
+	b5 := MakeBoard("*", 4, 2)
+	b5_expected := Board{
+		MakeRow("*", 2),
+		MakeRow("*", 2),
+		MakeRow("*", 2),
+		MakeRow("*", 2),
+	}
+
+	errormsgtemplate := "MakeBoard returned unexpected result.\nexpected rows:\n%v\ngot:\n%v."
+	boardrows := func(b Board) string {
+		rows := make([]string, b.Rows())
+		for i, row := range b {
+			rows[i] = fmt.Sprintf("  %#v", row)
+		}
+		return strings.Join(rows, "\n")
+	}
+
+	if !reflect.DeepEqual(b1, b1_expected) {
+		t.Errorf(errormsgtemplate, boardrows(b1_expected), boardrows(b1))
+	}
+	if !reflect.DeepEqual(b2, b2_expected) {
+		t.Errorf(errormsgtemplate, boardrows(b2_expected), boardrows(b2))
+	}
+	if !reflect.DeepEqual(b3, b3_expected) {
+		t.Errorf(errormsgtemplate, boardrows(b3_expected), boardrows(b3))
+	}
+	if !reflect.DeepEqual(b4, b4_expected) {
+		t.Errorf(errormsgtemplate, boardrows(b4_expected), boardrows(b4))
+	}
+	if !reflect.DeepEqual(b5, b5_expected) {
+		t.Errorf(errormsgtemplate, boardrows(b5_expected), boardrows(b5))
+	}
 }
 
 // TestMakeBoardZeroColumns testet, ob MakeBoard eine Panic auslöst,
