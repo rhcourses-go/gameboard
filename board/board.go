@@ -23,6 +23,18 @@ func MakeBoard(fill string, rows, cols int) Board {
 	return board
 }
 
+// MakeBoardFromStrings erwartet eine Slice aus Strings 'rows'
+// und erzeugt und liefert ein neues Spielfeld mit den Einträgen aus 'rows'.
+// Wenn einer der Einträge nicht erlaubt ist, wird eine Panic ausgelöst.
+func MakeBoardFromStrings(rows ...string) Board {
+	PanicIfLengthInvalid(len(rows))
+	board := make(Board, len(rows))
+	for i, row := range rows {
+		board[i] = MakeRowFromString(row)
+	}
+	return board
+}
+
 // Rows liefert die Anzahl der Zeilen.
 func (b Board) Rows() int {
 	return len(b)

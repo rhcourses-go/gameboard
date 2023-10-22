@@ -120,6 +120,25 @@ func TestMakeBoardInvalidFill(t *testing.T) {
 	MakeBoard("XX", 1, 1)
 }
 
+// TestMakeBoardFromStrings prüft die korrekte Verwendung von MakeBoardFromStrings.
+func TestMakeBoardFromStrings(t *testing.T) {
+	b1 := MakeBoardFromStrings("ABC", "DEF", "GHI")
+
+	expectedRows := "  ABC\n  DEF\n  GHI\n"
+	actualRows := ""
+	for _, row := range b1 {
+		actualRows += fmt.Sprintf("  %s\n", row.AsString())
+	}
+
+	if !reflect.DeepEqual(actualRows, expectedRows) {
+		t.Errorf(
+			"MakeBoardFromStrings returned unexpected result.\nexpected rows:\n%s\ngot:\n%s.",
+			expectedRows,
+			actualRows,
+		)
+	}
+}
+
 // ExampleBoard_Rows zeigt die korrekte Verwendung von Rows.
 func ExampleBoard_Rows() {
 	fmt.Println(MakeBoard("*", 1, 1).Rows())
